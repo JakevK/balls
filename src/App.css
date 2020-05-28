@@ -1,38 +1,246 @@
-.App {
-  text-align: center;
+/* import Hind and Montserrat from google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Hind&family=Montserrat:wght@400;600;700&display=swap');
+
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: #ECEAE2;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+.returnToMenuBtn {
+    display: block;
+    margin-top: 18px;
+    margin-left: 25px;
+
+    font-family: Hind;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 22px;
+    line-height: 35px;
+
+    color: #2C2A26;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+
+
+.gameContainer {
+    margin: 0 auto 0 auto;
+    padding: 0;
+    width: calc(100% - 50px);
+    height: 100%;
+    max-width: 950px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+
+.gameTitle {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 44px;
+    color: #000000;
+    margin-top: 70px;
 }
 
-.App-link {
-  color: #61dafb;
+.drawingLabel {
+    font-family: Hind;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 26px;
+    line-height: 42px;
+    margin-top: 20px;
+    color: #2C2A26;
+}
+.drawingLabel b {
+    font-weight: bold;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+.drawFocusContainer {
+    display: block;
+    width: 600px;
+    height: 205px;
+    margin: 110px auto 0 auto;
+}
+
+
+.nextBallBtn {
+    width: 177px;
+    height: 67px;
+
+    background: linear-gradient(130.94deg, #D4D3CB -7.86%, #FDFAF2 126.16%);
+    box-shadow: -9px -9px 18px #FFFFFF, 9px 9px 18px #B1B0AA;
+    border-radius: 293px;
+    user-select: none;
+
+    transition: box-shadow 0.05s, transform 0.05s;
+
+    display: block;
+    margin: 40px auto 0 auto;
+    text-align: center;
+}
+.nextBallBtn:active {
+    box-shadow: -4px -4px 8px #FFFFFF, 4px 4px 8px #B1B0AA;
+    transform: scale(0.98, 0.98)
+}
+
+
+.nextBallBtn > p {
+    position: absolute;
+    width: 100px;
+    height: 32px;
+
+    font-family: 'Hind', sans-serif;
+    font-size: 20px;
+    line-height: 32px;
+
+    margin-left: 32px;
+
+    display: flex;
+    align-items: center;
+
+    color: #2C2A26;
+}
+
+.focusedBall {
+    background: radial-gradient(77.32% 77.32% at 63.92% 29.38%, #C7FBD2 0%, #2DAB67 100%);
+    color: #2C2A26;
+    width: 205px;
+    height: 205px;
+    margin-right: 38px;
+    border-radius: 50%;
+    display: block;
+    float: right;
+}
+.focusedBall:after {
+    content: "";
+    display: block;
+    width: 205px;
+    height: 42px;
+    background: radial-gradient(50% 50% at 50% 50%, #B1B0AA 0%, #ECEAE2 100%);
+    position: relative;
+    top: 0px;
+    transform: translateY(-18px);
+    z-index: -1;
+}
+.focusedBall:before {
+    content: "";
+    display: block;
+    position: relative;
+    left: 26px;
+    top: 26px;
+    background: rgba(236, 234, 226, 0.62);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.focusedBall > div {
+    font-family: Hind;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 63px;
+    color: #2C2A26;
+
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    display: block;
+    position: relative;
+    left: 26px;
+    top: -74px;
+}
+
+
+.drawFocusContainerLeft {
+    display: block;
+    float: left;
+    height: 205px;
+    width: 357px;
+    margin: 24px 0 0 0;
+}
+
+.currentBallLabel {
+    color: #000000;
+    font-family: Montserrat;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 50px;
+    width: 357px;
+    text-align: center;
+}
+
+
+
+.drawnBallsLabel {
+    display: block;
+    width: 100%;
+    margin-top: 165px;
+    text-align: center;
+
+    font-family: Hind;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 38px;
+}
+
+
+.drawnBallsContainer {
+    margin-top: 37px;
+    text-align: center;
+    display: block;
+}
+
+.ball {
+    background: radial-gradient(77.32% 77.32% at 63.92% 29.38%, #AFC1FF 0%, #406AFF 100%);
+    color: #2C2A26;
+    width: 72px;
+    height: 72px;
+    margin: 11.5px;
+    border-radius: 50%;
+    display: inline-block;
+}
+.ball:after {
+    content: "";
+    display: block;
+    width: 72px;
+    height: 13px;
+    background: radial-gradient(50% 50% at 50% 50%, #B1B0AA 0%, #ECEAE2 100%);
+    position: relative;
+    top: 0px;
+    transform: translateY(-5px);
+    z-index: -1;
+}
+.ball:before {
+    content: "";
+    display: block;
+    position: relative;
+    left: 10px;
+    top: 10px;
+    background: rgba(236, 234, 226, 0.62);
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+.ball > div {
+    font-family: Hind;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 38px;
+    color: #2C2A26;
+
+    width: 35px;
+    height: 35px;
+    text-align: center;
+    display: block;
+    position: relative;
+    left: 10px;
+    top: -24px;
 }
