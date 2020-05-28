@@ -1,0 +1,12 @@
+{
+    "Bingo": {
+        "drawAmount": 90,
+        "drawMax": 90,
+        "drawMin": 1
+    },
+    "Lottery": {
+        "drawAmount": 6,
+        "drawMax": 40,
+        "drawMin": 1
+    }
+}
