@@ -1,24 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-const STORAGE_URL = window.location.protocol + '//' + window.location.host + '/storage/';
 
 
 function readStorage(endpoint, onReturn) {
-    fetch('/' + endpoint).then(response => response.json()).then(data => {
+    fetch('/storage/' + endpoint).then(response => response.json()).then(data => {
         onReturn(data);
     });
 }
 
 function writeStorage(endpoint, data) {
-    const http = new XMLHttpRequest();
-    
-    let url = STORAGE_URL + endpoint;
-
-    http.open('POST', url);
-    http.setRequestHeader("Content-type", "application/json; charset=utf-8");
-    http.send(JSON.stringify(data));
+    console.log(data);
+    fetch('/storage/' + endpoint, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+    }).then(response => {console.log(response)})
 }
 
 
@@ -35,7 +32,7 @@ class DrawBalls extends React.Component {
                 .fill(props.drawMin)
                 .map((x, y) => x + y),
             drawnBalls: [],
-        }
+       }
     }
 
 
@@ -45,7 +42,7 @@ class DrawBalls extends React.Component {
         
         if (this.state.remainingBalls.length) {
             this.setState({
-                remainingBalls: this.state.remainingBalls.filter((a, i) => i != ballIndex),
+                remainingBalls: this.state.remainingBalls.filter((a, i) => i !== ballIndex),
                 drawnBalls: [...this.state.drawnBalls, this.state.remainingBalls[ballIndex]]
             });
         }
@@ -165,7 +162,6 @@ class CustomGameInput extends React.Component {
         this.setState({
             save: !this.state.save
         });
-        console.log(event);
     }
 
 
@@ -251,38 +247,30 @@ class Root extends React.Component {
     constructor(props) {
         super(props);
 
-        readStorage('presets', this.fillContent);
-
-
         this.state = {
-            content: (
-                <p>loading presets...</p>
-            )
+            error: null,
+            isLoaded: false,
+            presets: {}
         }
     }
 
-    fillContent = (presetGames) => {
-        this.setState({
-            content: (
-                <div>
-                    <h3>Select a game type</h3>
-
-                    {Object.keys(presetGames).map((name) =>
-                        <button key={name} onClick={() => 
-                                this.startDraw(
-                                    name, 
-                                    presetGames[name]
-                                )}>
-                            {name}
-                        </button>
-                    )}
-
-                    <button onClick={this.startCustomGameInput}>
-                        Custom game
-                    </button>
-                </div>
+    componentDidMount() {
+        fetch('/storage/presets')
+            .then(result => result.json())
+            .then(
+                (result) => {
+                    this.setState({
+                        isLoaded: true,
+                        presets: result.presets
+                    });
+                },
+                (error) => {
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    })
+                }
             )
-        });
     }
 
     startDraw = (title, drawParams) => {
@@ -300,7 +288,25 @@ class Root extends React.Component {
     }
 
     render() {
-        return this.state.content;
+        return (
+            <div>
+                <h3>Select a game type</h3>
+
+                {Object.keys(this.state.presetGames).map((name) =>
+                    <button key={name} onClick={() => 
+                            this.startDraw(
+                                name, 
+                                presetGames[name]
+                            )}>
+                        {name}
+                    </button>
+                )}
+
+                <button onClick={this.startCustomGameInput}>
+                    Custom game
+                </button>
+            </div>
+        );
     }
 }
 

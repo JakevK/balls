@@ -1,4 +1,4 @@
-from flask import Flask, request, current_app, jsonify
+from flask import Flask, request, current_app
 import os, json
 
 
@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 
 
-@app.route('/presets', methods=['GET', 'POST'])
+@app.route('/storage/presets', methods=['GET', 'POST'])
 def handle_presets():
     if request.method == 'GET':
         presets_file = os.path.join(current_app.root_path, 'storage', 'presets.json')
@@ -20,10 +20,9 @@ def handle_presets():
         presets_file = os.path.join(current_app.root_path, 'storage', 'presets.json')
 
         data = request.json
-        
+
         with open(presets_file, 'w') as out:
             json.dump(data, out)
-
         return 'Success'
 
     else:
