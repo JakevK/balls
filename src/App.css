@@ -81,7 +81,6 @@ body {
 
     display: block;
     margin: 40px auto 0 auto;
-    text-align: center;
 }
 .nextBallBtn:active {
     box-shadow: -4px -4px 8px #FFFFFF, 4px 4px 8px #B1B0AA;
@@ -104,6 +103,12 @@ body {
     align-items: center;
 
     color: #2C2A26;
+}
+.nextBallBtn svg {
+    float: right;
+    display: block;
+    margin-right: 27px;
+    margin-top: 19px;
 }
 
 .focusedBall {

@@ -16,6 +16,7 @@ def handle_presets():
 
         return presets
 
+
     elif request.method =='POST':
         presets_file = os.path.join(current_app.root_path, 'storage', 'presets.json')
 
