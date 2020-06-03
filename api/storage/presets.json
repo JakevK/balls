@@ -11,18 +11,6 @@
             "drawMax": 40,
             "drawMin": 1,
             "name": "Lottery"
-        },
-        {
-            "drawAmount": 17,
-            "drawMax": 45,
-            "drawMin": 10,
-            "name": "yes"
-        },
-        {
-            "name": "asfd",
-            "drawAmount": 1,
-            "drawMin": 11,
-            "drawMax": 1111
         }
     ]
 }

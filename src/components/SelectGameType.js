@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router-dom"
 
 
 
@@ -9,7 +10,8 @@ class SelectGameType extends React.Component {
         this.state = {
             error: null,
             isLoaded: false,
-            presets: []
+            presets: [],
+            redirect: null
         }
     }
 
@@ -32,8 +34,10 @@ class SelectGameType extends React.Component {
             );
     }
 
+    
+
     render() {
-        const { error, isLoaded, presets, custom } = this.state;
+        const { error, isLoaded, presets, redirect } = this.state;
 
         
         if (error) {
@@ -44,9 +48,10 @@ class SelectGameType extends React.Component {
             return <div>Loading presets...</div>
         }
 
-        else if (custom) {
-
+        else if (redirect) {
+            return <Redirect to={redirect} push/>
         }
+
 
         else {
             return (
@@ -64,6 +69,9 @@ class SelectGameType extends React.Component {
                             {preset.name}
                         </button>
                     )}
+                    <button onClick={() => this.setState({redirect: "/custom"})}>
+                        Custom game
+                    </button>
                 </div>
             )
         }

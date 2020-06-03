@@ -12,6 +12,7 @@ import {
 import Draw from "./components/Draw"
 import SelectGameType from "./components/SelectGameType"
 import CustomGameInput from "./components/CustomGameInput"
+import Menu from "./components/Menu"
 
 
 
@@ -28,11 +29,11 @@ export default function App() {
             />
 
 
-            <Route path="/preset-game">
+            <Route path="/select-game">
                 <GameSetup form={SelectGameType} />
             </Route>
 
-            <Route path="/custom-game">
+            <Route path="/custom">
                 <GameSetup form={CustomGameInput} />
             </Route>
 
@@ -47,15 +48,6 @@ export default function App() {
 }
 
 
-
-function Menu() {
-    return (
-        <div>
-            <Link to="/preset-game">Preset game</Link>
-            <Link to="/custom-game">Custom game</Link>
-        </div>
-    );
-}
 
 
 
