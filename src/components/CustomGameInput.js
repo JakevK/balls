@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 
 
 
@@ -11,7 +12,8 @@ class CustomGameInput extends React.Component {
             drawAmount: "",
             drawMin: "",
             drawMax: "",
-            save: 0
+            save: 0,
+            submit: null
         }
     }
 
@@ -76,12 +78,25 @@ class CustomGameInput extends React.Component {
                 )
         }
 
-
-        this.props.submit(settings);
+        this.setState({
+            submit: settings
+        })
     }
 
 
     render() {
+        if (this.state.submit) {
+            return <Redirect 
+                to={{
+                    pathname: "/play",
+                    state: {
+                        settings: this.state.submit
+                    }
+                }}
+                push
+            />
+        }
+
         return (
             <div>
                 <h1>Custom game</h1>

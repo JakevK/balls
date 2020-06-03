@@ -5,7 +5,6 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link,
     Redirect
 } from "react-router-dom";
 
@@ -13,6 +12,7 @@ import Draw from "./components/Draw"
 import SelectGameType from "./components/SelectGameType"
 import CustomGameInput from "./components/CustomGameInput"
 import Menu from "./components/Menu"
+import MenuBtn from "./components/MenuBtn"
 
 
 
@@ -21,25 +21,36 @@ export default function App() {
     <Router>
         <Switch>
 
-            <Route path="/play" 
+            <Route path="/play" exact 
                 render={
-                    (props) => 
-                        <Draw settings={props.location.state.settings}/>
+                    (props) => ( 
+                        <div>
+                            <MenuBtn/>
+                            <Draw settings={props.location.state.settings}/>
+                        </div>
+                    )
                 }
             />
 
 
-            <Route path="/select-game">
-                <GameSetup form={SelectGameType} />
+            <Route path="/select-game" exact>
+                <MenuBtn/>
+                <SelectGameType/>
             </Route>
 
-            <Route path="/custom">
-                <GameSetup form={CustomGameInput} />
+            <Route path="/custom" exact>
+                <MenuBtn/>
+                <CustomGameInput/>
             </Route>
 
+
+            <Route path="/" exact>
+                <Menu />
+            </Route>
 
             <Route path="/">
-                <Menu />
+                <MenuBtn/>
+                404: page not found
             </Route>
 
         </Switch>
@@ -47,45 +58,3 @@ export default function App() {
   );
 }
 
-
-
-
-
-
-class GameSetup extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            complete: false,
-            settings: {}
-        };
-    }
-
-
-    setRedirect = (settings) => {
-        this.setState({
-            complete: true,
-            settings: settings
-        });
-    }
-
-
-    render() {
-        if (this.state.complete) {
-            return <Redirect 
-                to={{
-                    pathname: '/play',
-                    state: {
-                        settings: this.state.settings
-                    }
-                }}
-                push
-            />
-        }
-
-        const Form = this.props.form;
-
-        return <Form submit={this.setRedirect}/>
-    }
-}

@@ -1,5 +1,6 @@
 import React from "react";
-import { Redirect } from "react-router-dom"
+import { Link } from "react-router-dom";
+import * as Icon from "react-feather";
 
 
 
@@ -11,7 +12,6 @@ class SelectGameType extends React.Component {
             error: null,
             isLoaded: false,
             presets: [],
-            redirect: null
         }
     }
 
@@ -48,30 +48,38 @@ class SelectGameType extends React.Component {
             return <div>Loading presets...</div>
         }
 
-        else if (redirect) {
-            return <Redirect to={redirect} push/>
-        }
 
 
         else {
             return (
-                <div>
-                    <h3>Select a game type</h3>
+                <div className="menuContainer">
+                    <div className="menuTitle">Select a game type</div>
 
-                    {presets.map((preset) =>
-                        <button 
-                            key={preset.name} 
-                            onClick={() => 
-                                this.props.submit(preset)
-                            }
+                    <div className="menuList">
+                        {presets.map((preset) =>
+                            <Link
+                                className="menuItem" 
+                                key={preset.name} 
+                                to={{
+                                    pathname: "/play",
+                                    state: {
+                                        settings: preset
+                                    }
+                                }}
+                            >
+                                <Icon.ChevronRight color="#2C2A26"/>
+                                {preset.name}
+                            </Link>
+                        )}
+
+                        <Link
+                            className="menuItem"
+                            to="/custom"
                         >
-
-                            {preset.name}
-                        </button>
-                    )}
-                    <button onClick={() => this.setState({redirect: "/custom"})}>
-                        Custom game
-                    </button>
+                            <Icon.AlignLeft color="#2C2A26"/>
+                            Custom game
+                        </Link>
+                    </div>
                 </div>
             )
         }

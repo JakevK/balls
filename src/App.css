@@ -11,6 +11,56 @@ body {
 }
 
 
+.menuContainer {
+    width: 450px;
+    margin: 200px auto 0 auto;
+}
+
+.menuHeader {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 54px;
+    line-height: 66px;
+    color: #000000;
+    margin-bottom: 75px;
+    display: block;
+}
+.menuTitle {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 66px;
+    color: #000000;
+}
+
+.menuList {
+    margin-top: 50px;
+    padding: 0;
+}
+
+.menuItem {
+    font-family: Hind;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    height: 38px;
+    line-height: 38px;
+    color: #2C2A26;
+    text-decoration: none;
+    margin: 0 0 35px 0;
+    display: block;
+    display: flex;
+    align-items: center;
+}
+.menuItem svg {
+    margin: 0 25px 0 0;
+}
+
+
+
+
 .returnToMenuBtn {
     display: block;
     margin-top: 18px;
@@ -22,7 +72,15 @@ body {
     font-size: 22px;
     line-height: 35px;
 
+    text-decoration: none;
+    display: flex;
+    align-items: top;
+
     color: #2C2A26;
+}
+
+.returnToMenuBtn svg {
+    margin-right: 9px;
 }
 
 

@@ -6,16 +6,22 @@ import { Link } from "react-router-dom"
 
 function Menu() {
     return (
-        <div className="menuList">
-            <Link to="/select-game" className="menuItem">
-                <Icon.Play/>
-                Start game
-            </Link>
-            
-            <Link to="/presets" className="menuItem">
-                <Icon.Sliders/>
-                Edit presets
-            </Link>
+        <div className="menuContainer">
+            <div className="menuHeader">
+                Balls.
+            </div>
+
+            <div className="menuList">
+                <Link to="/select-game" className="menuItem">
+                    <Icon.Play size={25}/>
+                    Start game
+                </Link>
+                
+                <Link to="/presets" className="menuItem">
+                    <Icon.Sliders size={25}/>
+                    Edit presets
+                </Link>
+            </div>
         </div>
     );
 }
