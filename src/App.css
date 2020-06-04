@@ -54,9 +54,16 @@ body {
     display: flex;
     align-items: center;
 }
+.menuItem, .returnToMenuBtn {
+    transition: padding-left 0.1s;
+}
+.menuItem:hover, .returnToMenuBtn:hover {
+    padding-left: 10px;
+}
 .menuItem svg {
     margin: 0 25px 0 0;
 }
+
 
 
 

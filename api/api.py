@@ -27,4 +27,4 @@ def handle_presets():
         return 'Success'
 
     else:
-        return "Invalid method"
+        return 'Invalid method'

@@ -7,11 +7,12 @@ import {
     Route,
 } from "react-router-dom";
 
-import Draw from "./components/Draw"
-import SelectGameType from "./components/SelectGameType"
-import CustomGameInput from "./components/CustomGameInput"
-import Menu from "./components/Menu"
-import MenuBtn from "./components/MenuBtn"
+import Draw from "./components/Draw";
+import SelectGameType from "./components/SelectGameType";
+import CustomGameInput from "./components/CustomGameInput";
+import Menu from "./components/Menu";
+import MenuBtn from "./components/MenuBtn";
+import EditPresets from "./components/EditPresets";
 
 
 
@@ -40,6 +41,12 @@ export default function App() {
             <Route path="/custom" exact>
                 <MenuBtn/>
                 <CustomGameInput/>
+            </Route>
+
+            
+            <Route path="/presets" exact>
+                <MenuBtn/>
+                <EditPresets/>
             </Route>
 
 

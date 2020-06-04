@@ -135,13 +135,10 @@ class CustomGameInput extends React.Component {
                     />
                 </p>
 
-                <input 
-                    type="checkbox" 
-                    value={this.state.save} 
-                    name="saveCheck"
-                    onClick={this.handleChangeSave}
-                />
-                <label htmlFor="saveCheck">Save as preset</label>
+                <div onClick={this.handleChangeSave}>
+                    {this.state.save ? <Icon.CheckSquare/> : <Icon.Square/>}
+                    Save as preset
+                </div>
 
                 <br/>
                 <div
