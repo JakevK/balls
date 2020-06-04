@@ -15,7 +15,6 @@ To run the app you will need to open two separate terminal windows to the root d
 In one terminal start up the api:
 ```
 yarn start-api
-
 ```
 Then in the other terminal start the react frontend:
 ```

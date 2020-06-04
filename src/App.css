@@ -14,6 +14,11 @@ body {
 .menuContainer {
     width: 450px;
     margin: 200px auto 0 auto;
+    font-family: Hind;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    color: #2C2A26;
 }
 
 .menuHeader {
@@ -66,15 +71,41 @@ body {
 
 
 
+.checkInput {
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+.checkInput > svg {
+    margin-right: 10px;
+    transform: translateY(4px);
+}
+.checkInput:active {
+    transform: scale(1.05);
+    transform-origin: left;
+}
+
+
+
+
+.numberInput, .titleInput {
+    background: none;
+    border: none;
+    border-bottom: 1.5px solid #2C2A26;
+    box-shadow: none;
+    outline: none;
+    font-weight: bold;
+    font-size: 24px;
+    color: #2C2A26;
+}
 
 .numberInput {
     width: 40px;
-    margin: 0 5px;
+    margin: 0 10px;
 }
 
 .titleInput {
-    width: 200px;
-    margin-left: 5px;
+    width: 290px;
+    margin-left: 10px;
 }
 
 
@@ -157,6 +188,17 @@ body {
 
     display: block;
     margin: 40px auto 0 auto;
+}
+.noIconBtn > p {
+    display: block !important;
+    position: absolute !important;
+    width: 177px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center !important;
+}
+.noIconBtn {
+    margin-top: 60px;
 }
 .nextBallBtn:active {
     box-shadow: -4px -4px 8px #FFFFFF, 4px 4px 8px #B1B0AA;
@@ -260,7 +302,7 @@ body {
 .drawnBallsLabel {
     display: block;
     width: 100%;
-    margin-top: 165px;
+    margin-top: 100px;
     text-align: center;
 
     font-family: Hind;

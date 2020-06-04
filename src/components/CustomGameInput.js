@@ -100,7 +100,7 @@ class CustomGameInput extends React.Component {
 
         return (
             <div className="menuContainer">
-                <h1>Custom game</h1>
+                <div className="menuTitle">Custom game</div>
                 <p>
                     Title: 
                     <input 
@@ -135,7 +135,10 @@ class CustomGameInput extends React.Component {
                     />
                 </p>
 
-                <div onClick={this.handleChangeSave}>
+                <div 
+                    onClick={this.handleChangeSave}
+                    className="checkInput"
+                >
                     {this.state.save ? <Icon.CheckSquare/> : <Icon.Square/>}
                     Save as preset
                 </div>
