@@ -60,6 +60,17 @@ body {
 
 
 
+.numberInput {
+    width: 40px;
+    margin: 0 5px;
+}
+
+.titleInput {
+    width: 200px;
+    margin-left: 5px;
+}
+
+
 
 .returnToMenuBtn {
     display: block;

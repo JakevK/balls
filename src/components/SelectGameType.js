@@ -37,7 +37,7 @@ class SelectGameType extends React.Component {
     
 
     render() {
-        const { error, isLoaded, presets, redirect } = this.state;
+        const { error, isLoaded, presets } = this.state;
 
         
         if (error) {

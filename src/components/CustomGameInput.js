@@ -1,5 +1,6 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
+import * as Icon from "react-feather";
 
 
 
@@ -98,11 +99,12 @@ class CustomGameInput extends React.Component {
         }
 
         return (
-            <div>
+            <div className="menuContainer">
                 <h1>Custom game</h1>
                 <p>
                     Title: 
                     <input 
+                        className="titleInput"
                         type="text" 
                         value={this.state.title}
                         onChange={this.handleTitleChange}
@@ -112,18 +114,21 @@ class CustomGameInput extends React.Component {
                 <p>
                     Draw
                     <input 
+                        className="numberInput"
                         type="number" 
                         value={this.state.drawAmount}
                         onChange={this.handleDrawAmountChange}
                     />
                     balls from
                     <input 
+                        className="numberInput"
                         type="number" 
                         value={this.state.drawMin}
                         onChange={this.handleDrawMinChange}
                     />
                     to
                     <input 
+                        className="numberInput"
                         type="number" 
                         value={this.state.drawMax}
                         onChange={this.handleDrawMaxChange}
@@ -139,9 +144,15 @@ class CustomGameInput extends React.Component {
                 <label htmlFor="saveCheck">Save as preset</label>
 
                 <br/>
-                <button onClick={this.handleSubmit}>
-                    Start game
-                </button>
+                <div
+                    className="nextBallBtn"
+                    onClick={this.handleSubmit}
+                >
+                    <p>
+                        Start
+                    </p>
+                    <Icon.Play size={29} color="#2C2A26"/>
+                </div>
             </div>
         );
     }

@@ -6,7 +6,7 @@ import * as Icon from "react-feather";
 class Draw extends React.Component {
     constructor(props) {
         super(props);
-        const { name, drawAmount, drawMax, drawMin } = this.props.settings;
+        const { drawMax, drawMin } = this.props.settings;
 
         this.state = {
             // fill array with numbers from drawMin to drawMax
@@ -14,6 +14,7 @@ class Draw extends React.Component {
                 .fill(drawMin)
                 .map((x, y) => x + y),
             drawnBalls: [],
+            review: false
        }
     }
 
