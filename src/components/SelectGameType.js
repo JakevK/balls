@@ -45,7 +45,13 @@ class SelectGameType extends React.Component {
         }
 
         else if (!isLoaded) {
-            return <div>Loading presets...</div>
+            return (
+                <div className="menuContainer">
+                    <div className="menuHeader">
+                        Loading presets...
+                    </div>
+                </div>
+            );
         }
 
 

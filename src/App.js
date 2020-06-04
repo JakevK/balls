@@ -56,7 +56,11 @@ export default function App() {
 
             <Route path="/">
                 <MenuBtn/>
-                404: page not found
+                <div className="menuContainer">
+                    <div className="menuHeader">
+                        404: not found
+                    </div>
+                </div>
             </Route>
 
         </Switch>

@@ -1,1 +1,16 @@
-{"presets": [{"drawAmount": 90, "drawMax": 90, "drawMin": 1, "name": "Bingo"}, {"drawAmount": 6, "drawMax": 40, "drawMin": 1, "name": "Lottery"}, {"name": "my epic game", "drawAmount": 9, "drawMin": 17, "drawMax": 32}]}
+{
+    "presets": [
+        {
+            "drawAmount": 90,
+            "drawMax": 90,
+            "drawMin": 1,
+            "name": "Bingo"
+        },
+        {
+            "drawAmount": 6,
+            "drawMax": 40,
+            "drawMin": 1,
+            "name": "Lottery"
+        }
+    ]
+}
