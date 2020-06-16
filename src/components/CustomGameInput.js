@@ -14,7 +14,8 @@ class CustomGameInput extends React.Component {
             drawMin: "",
             drawMax: "",
             save: 0,
-            submit: null
+            submit: null,
+            errorMsg: "Invalid input"
         }
     }
 
@@ -118,6 +119,8 @@ class CustomGameInput extends React.Component {
                         type="number" 
                         value={this.state.drawAmount}
                         onChange={this.handleDrawAmountChange}
+                        min="1"
+                        max={this.state.drawMax && this.state.drawMin ? this.state.drawMax - this.state.drawMin : 100}
                     />
                     balls from
                     <input 
@@ -125,6 +128,8 @@ class CustomGameInput extends React.Component {
                         type="number" 
                         value={this.state.drawMin}
                         onChange={this.handleDrawMinChange}
+                        min="1"
+                        max={this.state.drawMax - 1 || 100}
                     />
                     to
                     <input 
@@ -132,6 +137,8 @@ class CustomGameInput extends React.Component {
                         type="number" 
                         value={this.state.drawMax}
                         onChange={this.handleDrawMaxChange}
+                        min={this.state.drawMin + 1 || 1}
+                        max="100"
                     />
                 </p>
 
@@ -143,7 +150,11 @@ class CustomGameInput extends React.Component {
                     Save as preset
                 </div>
 
-                <br/>
+                <div className="errorMsg">
+                    {this.state.errorMsg}
+                </div>
+
+
                 <div
                     className="nextBallBtn"
                     onClick={this.handleSubmit}
