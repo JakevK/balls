@@ -15,44 +15,92 @@ class CustomGameInput extends React.Component {
             drawMax: "",
             save: 0,
             submit: null,
-            errorMsg: "Invalid input"
+            errorMsg: ""
         }
     }
 
 
-    handleTitleChange = (event) => {
+    updateSetting = (event, setting, type="str") => {
+        // use the given type to convert the event data into the correct form
+        const value = {
+            // convert to a number
+            "int": Number,
+            // convert to a string
+            "str": String,
+            // toggle an existing boolean
+            "toggle": () => !this.state[setting]
+        }[type](event.target.value);
+
+        // update the state with the new value
         this.setState({
-            title: event.target.value
+            [setting]: value
         })
     }
 
-    handleDrawAmountChange = (event) => {
-        this.setState({
-            drawAmount: +event.target.value 
-        })
+    checkForErrors = () => {
+        const validation = {
+            title: {
+                name: "title",
+                additional: " characters long",
+                value: (a) => a.length,
+                min: 3,
+                max: 40
+            },
+            drawAmount: {
+                name: "amount to draw",
+                min: 1,
+                max: 100
+            },
+            drawMin: {
+                name: "\"from\" value",
+                min: 1,
+                max: 100
+            },
+            drawMax: {
+                name: "\"to\" value",
+                min: 1,
+                max: 100
+            }
+        }
+
+        for (let key in validation) {
+            if (!this.state[key]) {
+                return "Please enter a value for the " + validation[key].name + "."
+            }
+        }
+        for (let key in validation) {
+            const item = validation[key];
+            const value = "value" in item ? item.value(this.state[key]) : this.state[key];
+
+            if (value < item.min || value > item.max) {
+                const additional = "additional" in item ? item.additional : "";
+                return "The " + item.name + " must be between " + item.min + " and " + item.max + additional + ".";
+            }
+        }
+
+        if (this.state.drawMin > this.state.drawMax) {
+            return "The \"from\" value cannot be greater than the \"to\" value.";
+        }
+        if (this.state.drawAmount > this.state.drawMax - this.state.drawMin - 1) {
+            return "The amount to draw is too high.";
+        }
+
     }
 
-    handleDrawMinChange = (event) => {
-        this.setState({
-            drawMin: +event.target.value 
-        })
-    }
-
-    handleDrawMaxChange = (event) => {
-        this.setState({
-            drawMax: +event.target.value 
-        })
-    }
-
-
-    handleChangeSave = (event) => {
-        this.setState({
-            save: !this.state.save
-        });
-    }
 
 
     handleSubmit = () => {
+
+        const error = this.checkForErrors();
+        if (error) {
+            // update the error message in component state
+            this.setState({
+                errorMsg: error
+            });
+            // don't run the rest of the function
+            return;
+        }
+
         const settings = {
             name: this.state.title,
             drawAmount: this.state.drawAmount,
@@ -87,12 +135,22 @@ class CustomGameInput extends React.Component {
 
 
     render() {
-        if (this.state.submit) {
+        const {
+            title,
+            drawAmount, 
+            drawMin, 
+            drawMax, 
+            save, 
+            submit, 
+            errorMsg
+        } = this.state;
+
+        if (submit) {
             return <Redirect 
                 to={{
                     pathname: "/play",
                     state: {
-                        settings: this.state.submit
+                        settings: submit
                     }
                 }}
                 push
@@ -107,8 +165,8 @@ class CustomGameInput extends React.Component {
                     <input 
                         className="titleInput"
                         type="text" 
-                        value={this.state.title}
-                        onChange={this.handleTitleChange}
+                        value={title}
+                        onChange={(event) => this.updateSetting(event, "title")}
                     />
                 </p>
 
@@ -117,41 +175,41 @@ class CustomGameInput extends React.Component {
                     <input 
                         className="numberInput"
                         type="number" 
-                        value={this.state.drawAmount}
-                        onChange={this.handleDrawAmountChange}
+                        value={drawAmount}
+                        onChange={(event) => this.updateSetting(event, "drawAmount", "int")}
                         min="1"
-                        max={this.state.drawMax && this.state.drawMin ? this.state.drawMax - this.state.drawMin : 100}
+                        max={drawMax && drawMin ? drawMax - drawMin : 100}
                     />
                     balls from
                     <input 
                         className="numberInput"
                         type="number" 
-                        value={this.state.drawMin}
-                        onChange={this.handleDrawMinChange}
+                        value={drawMin}
+                        onChange={(event) => this.updateSetting(event, "drawMin", "int")}
                         min="1"
-                        max={this.state.drawMax - 1 || 100}
+                        max={drawMax - 1 || 100}
                     />
                     to
                     <input 
                         className="numberInput"
                         type="number" 
-                        value={this.state.drawMax}
-                        onChange={this.handleDrawMaxChange}
-                        min={this.state.drawMin + 1 || 1}
+                        value={drawMax}
+                        onChange={(event) => this.updateSetting(event, "drawMax", "int")}
+                        min={drawMin + 1 || 1}
                         max="100"
                     />
                 </p>
 
                 <div 
-                    onClick={this.handleChangeSave}
+                    onClick={(event) => this.updateSetting(event, "save", "toggle")}
                     className="checkInput"
                 >
-                    {this.state.save ? <Icon.CheckSquare/> : <Icon.Square/>}
+                    {save ? <Icon.CheckSquare/> : <Icon.Square/>}
                     Save as preset
                 </div>
 
                 <div className="errorMsg">
-                    {this.state.errorMsg}
+                    {errorMsg}
                 </div>
 
 

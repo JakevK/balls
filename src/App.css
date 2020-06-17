@@ -69,6 +69,11 @@ body {
     margin: 0 25px 0 0;
 }
 
+.errorMsg {
+    font-family: Hind;
+    color: #f34e4e;
+    margin-top: 20px;
+}
 
 
 .checkInput {
@@ -99,7 +104,7 @@ body {
 }
 
 .numberInput {
-    width: 40px;
+    width: 60px;
     margin: 0 10px;
 }
 
