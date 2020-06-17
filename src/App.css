@@ -20,6 +20,20 @@ body {
     font-size: 24px;
     color: #2C2A26;
 }
+.leftFloat {
+    display: block;
+    margin-left: 75px;
+    float: left;
+}
+.rightFloat {
+    display: bloack;
+    float: left;
+}
+.rightFloatBtn {
+    display: block;
+    float: right;
+    margin-right: 75px;
+}
 
 .menuHeader {
     font-family: Montserrat;
@@ -46,6 +60,7 @@ body {
 }
 
 .menuItem {
+    cursor: pointer;
     font-family: Hind;
     font-style: normal;
     font-weight: normal;
