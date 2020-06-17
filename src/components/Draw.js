@@ -60,17 +60,30 @@ class Draw extends React.Component {
                                 {' ' + drawAmount}
                             </div>
 
-                            <div 
-                                className="nextBallBtn" 
-                                onClick={this.drawBall}
-                            >
-                                <p>
-                                    {this.state.drawnBalls.length ? this.state.drawnBalls.length < drawAmount ? 'Next ball' : 'Extra ball' : 'Draw ball'}
-                                </p>
-                                
-                                <Icon.Shuffle size={29} color="#2C2A26"/>
-                                
-                            </div>
+                            {
+                                this.state.remainingBalls.length ? (
+                                    <div 
+                                        className="nextBallBtn" 
+                                        onClick={this.drawBall}
+                                    >
+                                        <p>
+                                            {this.state.drawnBalls.length ? this.state.drawnBalls.length < drawAmount ? 'Next ball' : 'Extra ball' : 'Draw ball'}
+                                        </p>
+                                        
+                                        <Icon.Shuffle size={29} color="#2C2A26"/>
+                                        
+                                    </div>
+                                ) : (
+                                    <div
+                                        className="nextBallBtn noIconBtn"
+                                        onClick={() => this.setState({review: true})}
+                                    >
+                                        <p>
+                                            Finish game
+                                        </p>
+                                    </div>
+                                )
+                            }
                         </div>
 
                         <div className="focusedBall">
@@ -80,14 +93,18 @@ class Draw extends React.Component {
                         </div>
                     </div>
 
-                    <div
-                        className="nextBallBtn noIconBtn"
-                        onClick={() => this.setState({review: true})}
-                    >
-                        <p>
-                            Finish game
-                        </p>
-                    </div>
+                    {
+                        this.state.remainingBalls.length ? (
+                            <div
+                                className="nextBallBtn noIconBtn"
+                                onClick={() => this.setState({review: true})}
+                            >
+                                <p>
+                                    Finish game
+                                </p>
+                            </div>
+                        ) : ""
+                    }
 
                     <div className="drawnBallsLabel">
                         {this.state.drawnBalls.length > 1 ? "Previously drawn balls..." : ""}
