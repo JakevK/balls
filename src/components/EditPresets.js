@@ -1,8 +1,19 @@
+/* EditPresets.js
+ * exports component EditPresets
+ * displays an interface for editing, saving and deleting game presets
+*/
+
+
+
+// external imports
 import React from "react";
 import * as Icon from "react-feather";
 
 
 
+/* EditPresets
+ * takes no props
+*/
 class EditPresets extends React.Component {
     constructor(props) {
         super(props);
@@ -19,13 +30,18 @@ class EditPresets extends React.Component {
             currentPreset: null,
             // index of preset currently being edited
             currentPresetIndex: null,
-            // TODO: comemtnt this whith brain cells
+            // error message/feedback to be displayed on invalid input
             errorMsg: ""
         }
     }
 
 
 
+    /* loadPresets()
+     * retreieves preset games from storage and updates state accordingly
+     * takes no parameters
+     * doesn't return anything
+    */
     loadPresets = () => {
         // send get request to presets endpoint of storage api
         fetch('/storage/presets')
@@ -56,7 +72,13 @@ class EditPresets extends React.Component {
     }
 
 
-
+    /* updatePreset()
+     * updates the currentPreset in state with values from an input
+     * takes parameters of:
+     *     event:   the user event that triggered the function
+     *     setting: the key of this setting to changetate
+     *     type:    data type of input - "int" or "str"
+    */
     updatePreset = (event, setting, type="str") => {
         // use the given type to convert the event data into the correct form
         const value = {
@@ -77,6 +99,13 @@ class EditPresets extends React.Component {
     }
 
     
+    /* checkForErrors()
+     * checks that the settings of the currentPreset in state are valid
+     * returns a string of user feedback
+     * pertaining to the most relevant error
+     * or null if no error is found
+     * takes no parameters
+    */
     checkForErrors = () => {
         // validation rules to specify valid ranges for values
         const validation = {
@@ -134,7 +163,7 @@ class EditPresets extends React.Component {
             return "The \"from\" value cannot be greater than the \"to\" value.";
         }
         // check that the amount to draw is not too high for the range specified
-        if (this.state.currentPreset.drawAmount > this.state.currentPreset.drawMax - this.state.currentPreset.drawMin - 1) {
+        if (this.state.currentPreset.drawAmount > this.state.currentPreset.drawMax - this.state.currentPreset.drawMin + 1) {
             return "The amount to draw is too high.";
         }
 
@@ -144,6 +173,11 @@ class EditPresets extends React.Component {
     }
 
 
+    /* savePreset()
+     * updates the presets in state with the currentPreset
+     * then saves the updated presets with the storage api
+     * takes no parameters
+    */
     savePreset = () => {
         // check for errors
         const error = this.checkForErrors();
@@ -157,20 +191,27 @@ class EditPresets extends React.Component {
             return;
         }
         else {
+            // no errors: no error message to display
             this.setState({errorMsg: ""});
         }
 
 
+        // make a copy of the presets from state
         let newPresetsList = [...this.state.presets];
         const insertionIndex = this.state.currentPresetIndex;
+        
         if (insertionIndex === null) {
+            // preset needs to be added to the preset list
             newPresetsList.push(this.state.currentPreset);
             this.setState({currentPresetIndex: newPresetsList.length - 1})
         }
         else {
-            newPresetsList[this.state.currentPresetIndex] = this.state.currentPreset;
+            // preset already exists in preset list
+            // update the exisiting value
+            newPresetsList[insertionIndex] = this.state.currentPreset;
         }
 
+        // send post request to presets endpoint of storage api with presets to be saved
         fetch("/storage/presets", {
             method : "POST",
             headers: {"Content-Type": "application/json"},
@@ -178,31 +219,45 @@ class EditPresets extends React.Component {
                 presets: newPresetsList
             })
         })
+        // update the component with presets
         this.loadPresets();
 
     }
 
+
+    /* deletePreset()
+     * removes the currentPreset in state from the presets
+     * then saves the updated presets with the storage api
+     * takes no parameters
+    */
     deletePreset = () => {
         if (!this.state.currentPresetIndex) {
+            // current preset has not been added to presets list in state
+            // no need to modify presets list or storage, only the current preset
             this.setState({
                 currentPreset: null
             });
         }
         else {
-            let newPresetList = this.state.presets;
+            // create new list from presets
+            let newPresetList = [...this.state.presets];
+            // remove the current preset from this list
             newPresetList.splice(this.state.currentPresetIndex, 1);
             
+            // update state with the updates presets
             this.setState({
                 presets: newPresetList,
+                // currentPreset and currentPresetIndex shouldn't exist anymore
                 currentPreset: null,
                 currentPresetIndex: null
             });
 
+            // post updated presets to storage api
             fetch("/storage/presets", {
                 method : "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({
-                    presets: this.state.presets
+                    presets: newPresetList
                 })
             })
             this.loadPresets();
@@ -292,9 +347,12 @@ class EditPresets extends React.Component {
         ];
 
 
+        // check if a preset is currently open for editing
         if (currentPreset) {
+            // store state values in variables to reduce repetition of this.state
             const { name, drawAmount, drawMin, drawMax } = this.state.currentPreset;
 
+            // add a form for editing preset values to the display
             display.push(
                 <div key="editor" className="menuContainer rightFloat">
                     <p>
@@ -366,10 +424,13 @@ class EditPresets extends React.Component {
             )
         }
 
+
+        // return everything that has been added to the display to be rendered
         return display;
     }
 }
 
 
 
+// export the component so it can be imported elsewhere
 export default EditPresets;
