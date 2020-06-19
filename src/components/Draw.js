@@ -104,7 +104,12 @@ class Draw extends React.Component {
                                     >
                                         <p>
                                             {/* customize the button message based on game progress */}
-                                            {this.state.drawnBalls.length ? this.state.drawnBalls.length < drawAmount ? 'Next ball' : 'Extra ball' : 'Draw ball'}
+                                            {
+                                                this.state.drawnBalls.length ? 
+                                                    this.state.drawnBalls.length < drawAmount ? 
+                                                        'Next ball' : 
+                                                        'Extra ball' : 
+                                                        'Draw ball'}
                                         </p>
                                         
                                         <Icon.Shuffle size={29} color="#2C2A26"/>
@@ -113,7 +118,12 @@ class Draw extends React.Component {
                                 ) : (
                                     <div
                                         className="nextBallBtn noIconBtn"
-                                        onClick={() => this.setState({review: true}) /* change state to enter review mode */}
+                                        onClick={() => 
+                                            //change state to enter review mode
+                                            this.setState({
+                                                review: true
+                                            })
+                                        }
                                     >
                                         <p>
                                             Finish game
@@ -125,7 +135,9 @@ class Draw extends React.Component {
 
                         <div className="focusedBall">
                             <div>
-                                {this.state.drawnBalls.length ? this.state.drawnBalls[this.state.drawnBalls.length - 1] : ' '}
+                                {this.state.drawnBalls.length ? 
+                                    this.state.drawnBalls[this.state.drawnBalls.length - 1] : ' '
+                                }
                             </div>
                         </div>
                     </div>
@@ -136,7 +148,12 @@ class Draw extends React.Component {
                         this.state.remainingBalls.length ? (
                             <div
                                 className="nextBallBtn noIconBtn"
-                                onClick={() => this.setState({review: true}) /* change state to enter review mode */}
+                                onClick={() => 
+                                    //change state to enter review mode
+                                    this.setState({
+                                        review: true
+                                    })
+                                }
                             >
                                 <p>
                                     Finish game

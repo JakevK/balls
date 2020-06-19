@@ -52,9 +52,9 @@ class EditPresets extends React.Component {
                     this.setState({
                         isLoaded: true,
                         presets: result.presets
-                    });
+                    })
                 },
-
+                
                 // handle an error in retrieving the data
                 (error) => {
                     this.setState({
@@ -150,11 +150,15 @@ class EditPresets extends React.Component {
         // check for values outside of the acceptable range
         for (let key in validation) {
             const item = validation[key];
-            const value = "value" in item ? item.value(this.state.currentPreset[key]) : this.state.currentPreset[key];
+            const value = "value" in item ? 
+                item.value(this.state.currentPreset[key]) : this.state.currentPreset[key];
 
             if (value < item.min || value > item.max) {
                 const additional = "additional" in item ? item.additional : "";
-                return "The " + item.name + " must be between " + item.min + " and " + item.max + additional + ".";
+                return "The " + item.name 
+                    + " must be between " 
+                    + item.min + " and " 
+                    + item.max + additional + ".";
             }
         }
 
@@ -163,7 +167,8 @@ class EditPresets extends React.Component {
             return "The \"from\" value cannot be greater than the \"to\" value.";
         }
         // check that the amount to draw is not too high for the range specified
-        if (this.state.currentPreset.drawAmount > this.state.currentPreset.drawMax - this.state.currentPreset.drawMin + 1) {
+        if (this.state.currentPreset.drawAmount > 
+                this.state.currentPreset.drawMax - this.state.currentPreset.drawMin + 1) {
             return "The amount to draw is too high.";
         }
 
@@ -252,6 +257,7 @@ class EditPresets extends React.Component {
                 currentPresetIndex: null
             });
 
+            console.log(newPresetList);
             // post updated presets to storage api
             fetch("/storage/presets", {
                 method : "POST",
@@ -269,7 +275,14 @@ class EditPresets extends React.Component {
 
     render() {
         // store state values in variables to reduce repetition of this.state
-        const { error, isLoaded, presets, currentPreset, currentPresetIndex, errorMsg } = this.state;
+        const { 
+            error, 
+            isLoaded, 
+            presets, 
+            currentPreset, 
+            currentPresetIndex, 
+            errorMsg 
+        } = this.state;
 
 
         // an error occurred in retrieving the presets data
@@ -312,7 +325,11 @@ class EditPresets extends React.Component {
                                     }
                                 }}
                             >
-                                {currentPresetIndex === i ? <Icon.CheckCircle color="#2C2A26"/> : <Icon.Circle color="#2C2A26"/>}
+                                {
+                                    currentPresetIndex === i ? 
+                                        <Icon.CheckCircle color="#2C2A26"/> : 
+                                        <Icon.Circle color="#2C2A26"/>
+                                }
                                 {preset.name}
                             </div>
                         )}

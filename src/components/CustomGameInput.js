@@ -121,7 +121,10 @@ class CustomGameInput extends React.Component {
 
             if (value < item.min || value > item.max) {
                 const additional = "additional" in item ? item.additional : "";
-                return "The " + item.name + " must be between " + item.min + " and " + item.max + additional + ".";
+                return "The " + item.name 
+                    + " must be between " 
+                    + item.min + " and " 
+                    + item.max + additional + ".";
             }
         }
 
