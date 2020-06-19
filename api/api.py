@@ -42,7 +42,7 @@ def handle_presets():
             json.dump(data, out)
 
         # show that it all worked!
-        return 'Success'
+        return data
 
     else:
         # not a post request or a get request so not supported

@@ -109,7 +109,8 @@ class Draw extends React.Component {
                                                     this.state.drawnBalls.length < drawAmount ? 
                                                         'Next ball' : 
                                                         'Extra ball' : 
-                                                        'Draw ball'}
+                                                        'Draw ball'
+                                            }
                                         </p>
                                         
                                         <Icon.Shuffle size={29} color="#2C2A26"/>

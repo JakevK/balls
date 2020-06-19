@@ -133,7 +133,7 @@ class CustomGameInput extends React.Component {
             return "The \"from\" value cannot be greater than the \"to\" value.";
         }
         // check that the amount to draw is not too high for the range specified
-        if (this.state.drawAmount > this.state.drawMax - this.state.drawMin - 1) {
+        if (this.state.drawAmount > this.state.drawMax - this.state.drawMin + 1) {
             return "The amount to draw is too high.";
         }
 
